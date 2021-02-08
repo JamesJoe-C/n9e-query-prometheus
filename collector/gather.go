@@ -3,13 +3,19 @@ package collector
 import (
 	"fmt"
 	"io/ioutil"
+	"context"
 	"log"
+	"os"
 	"net/http"
 	"sync"
 	"time"
+	// "reflect"
 
 	"github.com/didi/nightingale/src/dataobj"
 	"github.com/n9e/prometheus-exporter-collector/config"
+	"github.com/prometheus/client_golang/api"
+	"github.com/prometheus/client_golang/api/prometheus/v1"
+
 )
 
 func Gather() []*dataobj.MetricValue {
@@ -29,9 +35,9 @@ func Gather() []*dataobj.MetricValue {
 
 	for _, exporterUrl := range cfg.ExporterUrls {
 		wg.Add(1)
-		go func(url string) {
+		go func(url string,query string) {
 			defer wg.Done()
-			if metrics, err := gatherExporter(url); err == nil {
+			if metrics, err := gatherExporter(url,query); err == nil {
 				for _, m := range metrics {
 					if typ, exists := cfg.MetricType[m.Metric]; exists {
 						m.CounterType = typ
@@ -43,7 +49,7 @@ func Gather() []*dataobj.MetricValue {
 					metricChan <- m
 				}
 			}
-		}(exporterUrl)
+		}(exporterUrl,cfg.Query)
 	}
 
 	wg.Wait()
@@ -54,20 +60,57 @@ func Gather() []*dataobj.MetricValue {
 	return res
 }
 
-func gatherExporter(url string) ([]*dataobj.MetricValue, error) {
-	body, err := gatherExporterUrl(url)
+func gatherExporter(url string, query string) ([]*dataobj.MetricValue, error) {
+	// body, err := gatherExporterUrl(url)
+	// if err != nil {
+	// 	log.Printf("gather metrics from exporter error, url :[%s] ,error :%v", url, err)
+	// 	return nil, err
+	// }
+
+	// metrics, err := Parse(body)
+	// if err != nil {
+	// 	log.Printf("parse metrics error, url :[%s] ,error :%v", url, err)
+	// 	return nil, err
+	// }
+
+	// return metrics, nil
+
+
+	client, err := api.NewClient(api.Config{
+		Address: url,
+	})
 	if err != nil {
-		log.Printf("gather metrics from exporter error, url :[%s] ,error :%v", url, err)
-		return nil, err
+		fmt.Printf("Error creating client: %v\n", err)
+		os.Exit(1)
 	}
 
-	metrics, err := Parse(body)
+	v1api := v1.NewAPI(client)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	result, warnings, err := v1api.Query(ctx, query, time.Now())
 	if err != nil {
-		log.Printf("parse metrics error, url :[%s] ,error :%v", url, err)
+		fmt.Printf("Error querying Prometheus: %v\n", err)
+		os.Exit(1)
+	}
+	if len(warnings) > 0 {
+		fmt.Printf("Warnings: %v\n", warnings)
+	}
+	// fmt.Printf("Result:\n%v\n", result)
+	// fmt.Println(reflect.TypeOf(result))
+	// rs := result.String()
+	// fmt.Printf("Result:\n%v\n", rs)
+	// fmt.Println(reflect.TypeOf(rs))
+
+	// metrics, err := Parse([]byte(rs))
+	metrics, err := Parse(result)
+	if err != nil {
+		log.Printf("parse metrics error ,error :%v", err)
 		return nil, err
 	}
 
 	return metrics, nil
+
+	// return nil,nil
 }
 
 func gatherExporterUrl(url string) ([]byte, error) {

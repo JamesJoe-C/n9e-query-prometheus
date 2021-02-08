@@ -1,7 +1,8 @@
 {
   "exporter_urls": [
-    "http://127.0.0.1:9104/metrics"
+    "http://prometheus.pre.hzmantu.com"
   ],
+  "query": "service_memory_load",
   "append_tags": ["region=bj", "dept=cloud"],
   "endpoint": "127.0.0.1",
   "ignore_metrics_prefix": ["go_"],

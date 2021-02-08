@@ -7,7 +7,9 @@ import (
 )
 
 type PluginCfg struct {
+	Nid						 string			   `json:"nid"`
 	ExporterUrls             []string          `json:"exporter_urls"`
+	Query					 string			   `json:"query"`
 	AppendTags               []string          `json:"append_tags"`
 	Endpoint                 string            `json:"endpoint"`
 	Timeout                  int               `json:"timeout"`
@@ -29,6 +31,7 @@ func Get() *PluginCfg {
 func Parse(bs []byte) error {
 	Config = &PluginCfg{
 		ExporterUrls:             []string{},
+		Query:					  "",
 		AppendTags:               []string{},
 		Endpoint:                 "",
 		Timeout:                  500,
