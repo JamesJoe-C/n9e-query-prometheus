@@ -16,7 +16,7 @@
     $ mkdir -p $GOPATH/src/github.com/n9e
     $ cd $GOPATH/src/github.com/n9e
     $ git clone https://github.com/JamesJoe-C/n9e-query-prometheus.git
-    $ cd prometheus-exporter-collector
+    $ cd n9e-query-prometheus
     $ export GO111MODULE=on
     $ export GOPROXY=https://goproxy.cn
     $ go build
@@ -36,3 +36,4 @@
 ```
 
 目前仅测试到Gauge数据格式，后续更新其他数据格式DEMO。
+
