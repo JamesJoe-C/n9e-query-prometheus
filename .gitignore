@@ -1,6 +1,7 @@
 # Default ignored files
 .idea
 
+/n9e-query-prometheus
 /prometheus-exporter-collector
 /go.sum
 /main
