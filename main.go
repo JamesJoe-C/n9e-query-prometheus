@@ -12,7 +12,7 @@ import (
 	"github.com/didi/nightingale/src/dataobj"
 	"github.com/n9e/prometheus-exporter-collector/collector"
 	"github.com/n9e/prometheus-exporter-collector/config"
-	"github.com/n9e/prometheus-exporter-collector/model"
+	// "github.com/n9e/prometheus-exporter-collector/model"
 	fmodel "github.com/open-falcon/falcon-plus/common/model"
 )
 
@@ -82,16 +82,7 @@ func main() {
 	// gather exporter metrics
 	metrics := collector.Gather()
 
-	if backend == "falcon" {
-		// falcon support interval above 10 seconds
-		if step < 10 {
-			step = 10
-		}
-		vs := model.FmtFalconMetricValue(metrics, step)
-		// stdout to open-falcon
-		printFalconMetrics(vs)
-	} else {
-		// stdout to nightingale
-		printMetrics(metrics)
-	}
+	// stdout to nightingale
+	printMetrics(metrics)
+	
 }
