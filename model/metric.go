@@ -2,7 +2,7 @@ package model
 
 import (
 	"github.com/didi/nightingale/src/dataobj"
-	"github.com/n9e/prometheus-exporter-collector/config"
+	"github.com/mainto-hz/n9e-query-prometheus/config"
 	fmodel "github.com/open-falcon/falcon-plus/common/model"
 )
 

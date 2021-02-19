@@ -14,8 +14,8 @@ import (
 	// "github.com/prometheus/common/expfmt"
 	promodel "github.com/prometheus/common/model"
 
-	"github.com/n9e/prometheus-exporter-collector/config"
-	"github.com/n9e/prometheus-exporter-collector/model"
+	"github.com/mainto-hz/n9e-query-prometheus/config"
+	"github.com/mainto-hz/n9e-query-prometheus/model"
 )
 
 var now = time.Now().Unix()
@@ -50,7 +50,7 @@ func Parse(buf promodel.Value) ([]*dataobj.MetricValue, error) {
 		
 
 		
-		metric.Endpoint = ""
+		metric.Endpoint = cfg.Endpoint
 		// metric.Nid = ""
 		metric.Tags = makeAppendTags(metric.TagsMap, config.AppendTagsMap)
 		// set provided Time, ms to s

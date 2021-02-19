@@ -12,7 +12,7 @@ import (
 	// "reflect"
 
 	"github.com/didi/nightingale/src/dataobj"
-	"github.com/n9e/prometheus-exporter-collector/config"
+	"github.com/mainto-hz/n9e-query-prometheus/config"
 	"github.com/prometheus/client_golang/api"
 	"github.com/prometheus/client_golang/api/prometheus/v1"
 
@@ -27,13 +27,13 @@ func Gather() []*dataobj.MetricValue {
 	done := make(chan struct{}, 1)
 
 	go func() {
-		fmt.Println("123123123123")
-		fmt.Printf("asdfasdfasdfasdf $v\n", 1)
+		// fmt.Println("123123123123")
+		// fmt.Printf("asdfasdfasdfasdf $v\n", 1)
 		defer func() { done <- struct{}{} }()
 		for m := range metricChan {
 			res = append(res, m)
 		}
-		fmt.Printf("nid: %v\n", cfg.Nid)
+		// fmt.Printf("nid: %v\n", cfg.Nid)
 
 		if cfg.Nid != ""{
 			for m := range metricChan {

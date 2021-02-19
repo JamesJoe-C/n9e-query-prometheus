@@ -10,9 +10,9 @@ import (
 	"os"
 
 	"github.com/didi/nightingale/src/dataobj"
-	"github.com/n9e/prometheus-exporter-collector/collector"
-	"github.com/n9e/prometheus-exporter-collector/config"
-	// "github.com/n9e/prometheus-exporter-collector/model"
+	"github.com/mainto-hz/n9e-query-prometheus/collector"
+	"github.com/mainto-hz/n9e-query-prometheus/config"
+	// "github.com/mainto-hz/n9e-query-prometheus/model"
 	fmodel "github.com/open-falcon/falcon-plus/common/model"
 )
 

@@ -3,8 +3,8 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/n9e/prometheus-exporter-collector/collector"
-	"github.com/n9e/prometheus-exporter-collector/config"
+	"github.com/mainto-hz/n9e-query-prometheus/collector"
+	"github.com/mainto-hz/n9e-query-prometheus/config"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

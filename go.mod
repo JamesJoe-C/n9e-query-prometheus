@@ -1,11 +1,10 @@
-module github.com/n9e/n9e-query-prometheus
+module github.com/mainto-hz/n9e-query-prometheus
 
 go 1.13
 
 require (
-	github.com/didi/nightingale v1.3.3
+	github.com/didi/nightingale v1.4.0
 	github.com/json-iterator/go v1.1.10
-	github.com/n9e/prometheus-exporter-collector v0.0.0-20210107070605-040aa6b799a4
 	github.com/open-falcon/falcon-plus v0.2.2
 	github.com/prometheus/client_golang v1.9.0
 	github.com/prometheus/client_model v0.2.0

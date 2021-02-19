@@ -31,6 +31,7 @@ func Get() *PluginCfg {
 
 func Parse(bs []byte) error {
 	Config = &PluginCfg{
+		Nid:                      "",
 		ExporterUrls:             []string{},
 		Query:					  "",
 		AppendTags:               []string{},
