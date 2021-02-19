@@ -1,6 +1,6 @@
 {
   "exporter_urls": [
-    "http://prometheus.pre.hzmantu.com"
+    "http://prometheus.url"
   ],
   "query": "service_memory_load",
   "append_tags": ["region=bj", "dept=cloud"],
