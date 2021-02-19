@@ -40,8 +40,11 @@
 ```
 配置文件说明：
 exporter_urls中对于线上需要用户名密码验证的prometheus，书写格式如下：https://user:password@prometheus.url
+
 query可以书写任意prometheus的pql语句，但使用聚合函数时因metrice不存在，请书写metric_prefix字段。
+
 endpoint对应夜莺资源树中机器。
+
 nid对应夜莺组织，用于无设备相关监控选项。如果配置nid，endpoint请保持为空或不传递。
 
 ## 注意
