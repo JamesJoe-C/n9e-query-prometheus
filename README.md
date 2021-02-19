@@ -38,10 +38,11 @@
   "endpoint":"192.168.1.1"
 }
 ```
-配置文件说明：
+### 配置文件说明：
+
 exporter_urls中对于线上需要用户名密码验证的prometheus，书写格式如下：https://user:password@prometheus.url
 
-query可以书写任意prometheus的pql语句，但使用聚合函数时因metrice不存在，请书写metric_prefix字段。
+query可以书写任意prometheus的pql语句，但使用聚合函数时因metrice不存在，请书写metric_prefix字段用于夜莺监控指标显示。
 
 endpoint对应夜莺资源树中机器。
 
