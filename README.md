@@ -31,10 +31,23 @@
   "exporter_urls": [
     "http://prometheus.url"
   ],
-  "query": "service_memory_load",
-  "timeout": 5000
+  "query": "sum by (instance) (service_record:pod_qps)",
+  "timeout": 5000,
+  "metric_prefix":"sum_pod_qps",
+  "nid":"dept",
+  "endpoint":"192.168.1.1"
 }
 ```
+配置文件说明：
+query可以书写任意prometheus的pql语句，但使用聚合函数时因metrice不存在，请书写metric_prefix字段。
+endpoint对应夜莺资源树中机器。
+nid对应夜莺组织，用于无设备相关监控选项。如果配置nid，endpoint请保持为空或不传递。
+
+## 注意
 
 目前仅测试到Gauge数据格式，后续更新其他数据格式DEMO。
+
+因夜莺包缺少Nid字段，正在沟通中。本项目暂时缺少依赖，后续更新。
+
+
 
