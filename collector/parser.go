@@ -33,7 +33,7 @@ func makeLabels(m promodel.Metric) map[string]string {
 }
 // func Parse(buf []byte) ([]*dataobj.MetricValue, error) {
 func Parse(buf promodel.Value) ([]*dataobj.MetricValue, error) {
-	// cfg := config.Get()
+	cfg := config.Get()
 	var metricList []*dataobj.MetricValue
 	// 数据格式转换，从prometheus的格式转换为json
 	for _, data := range buf.(promodel.Vector) {
@@ -45,11 +45,13 @@ func Parse(buf promodel.Value) ([]*dataobj.MetricValue, error) {
 
 		now = time.Now().Unix()
 		tags := makeLabels(data.Metric)
+		
 		metric := model.NewGaugeMetric(string(data.Metric["__name__"]), float64(data.Value), now, tags)
 		
 
 		
-		// metric.Endpoint = cfg.Endpoint
+		metric.Endpoint = ""
+		// metric.Nid = ""
 		metric.Tags = makeAppendTags(metric.TagsMap, config.AppendTagsMap)
 		// set provided Time, ms to s
 		// if metric.Timestamp  > 0 {

@@ -1,5 +1,6 @@
 # 简介
 
+
 Nightingale接入prometheus query接口做数据源，替代Alertmanager作为CNCF监控体系中告警模块的补充。
 
 
@@ -24,7 +25,7 @@
 
  
 ## 插件使用
-夜莺中stdin如下：
+夜莺配置stdin如下：
 ```
 {
   "exporter_urls": [

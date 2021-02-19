@@ -27,9 +27,18 @@ func Gather() []*dataobj.MetricValue {
 	done := make(chan struct{}, 1)
 
 	go func() {
+		fmt.Println("123123123123")
+		fmt.Printf("asdfasdfasdfasdf $v\n", 1)
 		defer func() { done <- struct{}{} }()
 		for m := range metricChan {
 			res = append(res, m)
+		}
+		fmt.Printf("nid: %v\n", cfg.Nid)
+
+		if cfg.Nid != ""{
+			for m := range metricChan {
+				res.Nid = cfg.Nid
+			}
 		}
 	}()
 

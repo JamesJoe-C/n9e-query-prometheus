@@ -1,6 +1,6 @@
 # Default ignored files
 .idea
-
+/.vscode
 /n9e-query-prometheus
 /prometheus-exporter-collector
 /go.sum
