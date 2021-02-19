@@ -35,11 +35,11 @@ func Gather() []*dataobj.MetricValue {
 		}
 		// fmt.Printf("nid: %v\n", cfg.Nid)
 
-		if cfg.Nid != ""{
-			for m := range metricChan {
-				res.Nid = cfg.Nid
-			}
-		}
+		// if cfg.Nid != ""{
+		// 	for m := range metricChan {
+		// 		res.Nid = cfg.Nid
+		// 	}
+		// }
 	}()
 
 	for _, exporterUrl := range cfg.ExporterUrls {

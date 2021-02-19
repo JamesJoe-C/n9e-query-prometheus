@@ -38,7 +38,7 @@
   "endpoint":"192.168.1.1"
 }
 ```
-### 配置文件说明：
+#### 配置文件说明：
 
 exporter_urls中对于线上需要用户名密码验证的prometheus，书写格式如下：https://user:password@prometheus.url
 
