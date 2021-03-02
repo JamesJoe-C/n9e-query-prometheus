@@ -1,6 +1,6 @@
 {
   "exporter_urls": [
-    "https://prometheus:A7OaPzEjcdLhYVJuSMQsxDHC@prometheus.online.hzmantu.com"
+    "https://prometheus.com"
   ],
   "query": "sum by (instance) (service_record:pod_qps)",
   "timeout": 50000,
