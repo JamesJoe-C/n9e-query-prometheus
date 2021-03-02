@@ -41,7 +41,7 @@ func Gather() []*dataobj.MetricValue {
 		// 	}
 		// }
 	}()
-
+    
 	for _, exporterUrl := range cfg.ExporterUrls {
 		wg.Add(1)
 		go func(url string,query string) {
@@ -83,6 +83,7 @@ func gatherExporter(url string, query string) ([]*dataobj.MetricValue, error) {
 	// }
 
 	// return metrics, nil
+	cfg := config.Get()
 
 
 	client, err := api.NewClient(api.Config{
@@ -96,7 +97,14 @@ func gatherExporter(url string, query string) ([]*dataobj.MetricValue, error) {
 	v1api := v1.NewAPI(client)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	result, warnings, err := v1api.Query(ctx, query, time.Now())
+	query_time := time.Now()
+	// fmt.Printf("query_time: %v\n", query_time)
+	if cfg.QueryTime != ""{
+		// fmt.Printf("cfg.QueryTime: %v\n", cfg.QueryTime)
+		query_time, _ = time.ParseInLocation("2006-01-02 15:04:05", cfg.QueryTime, time.Local)
+	}
+	// fmt.Printf("query_time: %v\n", query_time)
+	result, warnings, err := v1api.Query(ctx, query, query_time)
 	if err != nil {
 		fmt.Printf("Error querying Prometheus: %v\n", err)
 		os.Exit(1)
@@ -104,6 +112,7 @@ func gatherExporter(url string, query string) ([]*dataobj.MetricValue, error) {
 	if len(warnings) > 0 {
 		fmt.Printf("Warnings: %v\n", warnings)
 	}
+
 	// fmt.Printf("Result:\n%v\n", result)
 	// fmt.Println(reflect.TypeOf(result))
 	// rs := result.String()

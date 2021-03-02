@@ -1,13 +1,8 @@
 {
   "exporter_urls": [
-    "http://prometheus.url"
+    "https://prometheus:A7OaPzEjcdLhYVJuSMQsxDHC@prometheus.online.hzmantu.com"
   ],
-  "query": "service_memory_load",
-  "append_tags": ["region=bj", "dept=cloud"],
-  "endpoint": "127.0.0.1",
-  "ignore_metrics_prefix": ["go_"],
-  "metric_prefix": "",
-  "metric_type": {},
-  "default_mapping_metric_type": "SUBTRACT",
-  "timeout": 500
+  "query": "sum by (instance) (service_record:pod_qps)",
+  "timeout": 50000,
+  "metric_prefix":"sum_pod_qps"
 }

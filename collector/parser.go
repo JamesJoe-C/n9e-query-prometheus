@@ -43,10 +43,10 @@ func Parse(buf promodel.Value) ([]*dataobj.MetricValue, error) {
 		// fmt.Printf("Value = %v \n", data.Value)
 		// fmt.Printf("Timestamp = %v \n", data.Timestamp)
 
-		now = time.Now().Unix()
+		// now = time.Now().Unix()
 		tags := makeLabels(data.Metric)
 		
-		metric := model.NewGaugeMetric(string(data.Metric["__name__"]), float64(data.Value), now, tags)
+		metric := model.NewGaugeMetric(string(data.Metric["__name__"]), float64(data.Value), data.Timestamp.Unix(), tags)
 		
 
 		

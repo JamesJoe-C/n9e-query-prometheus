@@ -18,6 +18,9 @@ type PluginCfg struct {
 	MetricType               map[string]string `json:"metric_type"`
 	DefaultMappingMetricType string            `json:"default_mapping_metric_type"` // prometheus中计数器类型的默认转换规则
 	Authorization            string            `json:"authorization"`
+	QueryTime                string            `json:"history_query_time"`
+	
+
 }
 
 var (
